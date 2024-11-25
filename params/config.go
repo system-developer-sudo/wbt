@@ -22,6 +22,7 @@ import (
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/ethereum/go-ethereum/log"
 
 	"github.com/ethereum/go-ethereum/common"
 	"golang.org/x/crypto/sha3"
@@ -790,6 +791,9 @@ func (c *ChainConfig) CheckConfigForkOrder() error {
 		timestamp *uint64  // forks after the merge are scheduled using timestamps
 		optional  bool     // if true, the fork may be nil and next fork is still allowed
 	}
+
+	log.Info(fmt.Sprintf("[Current Blockchain Config] %+v", c))
+
 	var lastFork fork
 	for _, cur := range []fork{
 		{name: "homesteadBlock", block: c.HomesteadBlock},
